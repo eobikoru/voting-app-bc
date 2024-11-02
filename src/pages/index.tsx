@@ -15,8 +15,23 @@ const Home: NextPage = () => {
         <link href="/favicon.ico" rel="icon" />
       </Head>
 
-      <main className={styles.main}>
-        <ConnectButton />
+      <main className=" my-20">
+            <h2 className="text-3xl my-10 font-bold text-center animate-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-purple-700">
+          Welcome To </h2>
+          
+          <h2 className=' text-2xl font-bold text-center animate-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-purple-700'>Chain Master Decentralized Voting System</h2>
+
+        
+            <span className="flex justify-center items-center  my-32">
+              <button className="bg-gray-500 border border-gray-700 text-white font-semibold py-2 px-14 rounded">
+                No of voters: 0
+              </button>
+              <button className="bg-gray-500 mx-8 border border-gray-700 text-white font-semibold py-2 px-14 rounded">
+                No of proposal: 0
+              </button>
+
+            </span>
+          
 
       </main>
 
