@@ -15,7 +15,7 @@ const Navbar = () => {
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event:any) => {
       if (!event.target.closest('#dropdown')) {
         closeDropdown();
       }
@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <section>
-      <nav className="flex justify-between items-center py-2 px-4 bg-gray-400">
+      <nav className="flex justify-between h-[5rem] items-center py-2 px-4 bg-black">
         <Link
           href="/"
           className="text-3xl font-bold text-white hover:text-gray-800 focus:outline-none dark:text-gray-200"
