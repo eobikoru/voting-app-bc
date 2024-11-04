@@ -60,6 +60,13 @@ const Navbar = () => {
                 <Link href="/createproposal" className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none dark:text-neutral-400 dark:hover:bg-neutral-700" onClick={closeDropdown}>
                   Create Proposal
                 </Link>
+                <Link href="/listofproposal" className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none dark:text-neutral-400 dark:hover:bg-neutral-700" onClick={closeDropdown}>
+                 List of Proposal
+                </Link>
+
+                <Link href="/listofvoters" className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none dark:text-neutral-400 dark:hover:bg-neutral-700" onClick={closeDropdown}>
+                 List of Voters
+                </Link>
                 <Link href="/viewwinner" className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none dark:text-neutral-400 dark:hover:bg-neutral-700" onClick={closeDropdown}>
                   View Winner
                 </Link>
