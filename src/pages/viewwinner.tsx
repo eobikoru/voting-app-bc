@@ -13,9 +13,9 @@ const viewwinner = () => {
          <h1 className='text-4xl font-bold text-white'>Winning proposal</h1>
          <button onClick={toggleList} className='bg-purple-800 rounded-sm p-2 w-32 text-sm  text-white text-center'>{isVisible ? 'Hide Details' : 'View Proposal'}</button>
          <div className={`flex flex-col gap-6 w-72 items-center bg-black text-white  text-3xl border border-violet-400 rounded-xl p-5 mt-12 ${isVisible ? 'flex' : 'hidden'} `}>
-           <p></p>
-           <p>voteCount</p>
-           <p></p>
+           <p>Description: </p>
+           <p>Vote Count: </p>
+           <p>Creator: </p>
          </div>
 
       </div>
