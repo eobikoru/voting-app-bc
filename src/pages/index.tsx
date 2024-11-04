@@ -13,9 +13,11 @@ const Home: NextPage = () => {
           name="description"
         />
         <link href="/favicon.ico" rel="icon" />
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet"/>
+
       </Head>
 
-      <main className=" my-20">
+      <main className=" my-20 font-raleway">
             <div className='bg-black w-[70%] mx-auto'>
 
           <h2 className=' p-8 text-4xl font-bold text-center animate-gradient bg-clip-text text-transparent bg-gradient-to-r from-white to-purple-700'>Chain Master Decentralized Voting System</h2>
