@@ -3,7 +3,7 @@ import React from "react";
 const registervoter = () => {
   return (
     <section>
-<div className="h-[100vh]">
+<div className="h-[100vh] font-raleway">
   <div className=" h-[100%] flex">
     <div className=" flex-1">
       <div className=" bg-black h-80 w-[85%] mx-auto mt-10 rounded-xl">

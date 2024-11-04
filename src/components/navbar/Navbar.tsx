@@ -28,13 +28,13 @@ const Navbar = () => {
   }, []);
 
   return (
-    <section>
+    <section className='font-raleway'>
       <nav className="flex justify-between h-[5rem] items-center py-2 px-4 bg-black">
         <Link
           href="/"
           className="text-3xl font-bold text-white hover:text-gray-800 focus:outline-none dark:text-gray-200"
         >
-          Chain Master
+          Chain Masters
         </Link>
 
         <div className="relative" id="dropdown">
