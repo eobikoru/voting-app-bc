@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { runFireworks } from '../lib/utils';
 
 
 
@@ -6,7 +7,11 @@ import React, { useState } from 'react'
 const viewwinner = () => {
   const[isVisible, setIsVisible] = useState(false);
 
-  const toggleList = () => setIsVisible(!isVisible);
+  const toggleList = () => {
+    setIsVisible(!isVisible);
+    runFireworks();
+  } 
+    
   return (
     <div className=''>
       <div className='bg-black flex-col flex items-center gap-5 w-[40vw] rounded-xl p-14 m-auto mt-40 font-raleway'>

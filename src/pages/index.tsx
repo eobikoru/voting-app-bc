@@ -2,8 +2,22 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import { useAccount } from 'wagmi'
+import { useReadContract } from 'wagmi';
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from '../constant/constant';
 
 const Home: NextPage = () => {
+  const account = useAccount()
+  console.log(account.address,"acct");
+  
+    const {data , error} = useReadContract({
+        abi: CONTRACT_ABI,
+        address: CONTRACT_ADDRESS,
+        functionName: 'getVotingStatistics',
+    })
+    
+    console.log(data );
+    console.log(error)
   return (
     <div className={styles.container}>
       <Head>
