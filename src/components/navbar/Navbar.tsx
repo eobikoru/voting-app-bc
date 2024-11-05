@@ -40,9 +40,9 @@ const Navbar = () => {
         <div className="relative" id="dropdown">
           <button 
             onClick={toggleDropdown} 
-            className="flex items-center gap-x-2 text-sm font-bold text-black-600 border border-gray-400 bg-white rounded-xl p-1 px-2 hover:bg-gray-100 focus:outline-none dark:text-blue-500 dark:hover:bg-gray-700"
+            className="flex  py-2 px-3 items-center gap-x-2 text-sm font-bold text-black-600 border border-gray-400 bg-white rounded-xl p-1 px-2 hover:bg-gray-100 focus:outline-none dark:text-blue-500 dark:hover:bg-gray-700"
           >
-            Click Here
+            Features
             <svg className="transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="m6 9 6 6 6-6" />
             </svg>
