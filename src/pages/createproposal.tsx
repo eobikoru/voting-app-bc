@@ -3,7 +3,7 @@ import Notification from '../components/Notification';
 import { useAccount } from 'wagmi'
 const createproposal = () => {
   const account = useAccount()
-  console.log(account.address,"acct");
+
   
   if(account.address === undefined){
     return (
