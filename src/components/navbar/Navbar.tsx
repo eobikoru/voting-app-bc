@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
-
+import { useAccount } from 'wagmi'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const account = useAccount()
+  console.log(account.address,"acct");
+  
   const toggleDropdown = () => {
     setIsOpen(prev => !prev);
   };
@@ -36,8 +38,11 @@ const Navbar = () => {
         >
           Chain Masters
         </Link>
-
-        <div className="relative" id="dropdown">
+  {
+   account.address && (
+      <>
+      
+       <div className="relative" id="dropdown">
           <button 
             onClick={toggleDropdown} 
             className="flex  py-2 px-3 items-center gap-x-2 text-sm font-bold text-black-600 border border-gray-400 bg-white rounded-xl p-1 px-2 hover:bg-gray-100 focus:outline-none dark:text-blue-500 dark:hover:bg-gray-700"
@@ -74,6 +79,10 @@ const Navbar = () => {
             </div>
           )}
         </div>
+      </>
+    )
+  }
+       
 
         <ConnectButton />
       </nav>

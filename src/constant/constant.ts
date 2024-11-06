@@ -1,5 +1,5 @@
 
-export const CONTRACT_ADDRESS = "0x23bEA167434D781Ad496B25D608603452a0b31ce";
+export const CONTRACT_ADDRESS = "0x9B2B7C446073797d25a84d8C6524291442BFE380";
 export const CONTRACT_ABI = [
 	{
 		"inputs": [
@@ -96,6 +96,56 @@ export const CONTRACT_ABI = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getRegisteredVoters",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "bool",
+						"name": "isRegistered",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "hasVoted",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votedProposalId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "age",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "registrationTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "voterAddress",
+						"type": "address"
+					}
+				],
+				"internalType": "struct Vote.Voter[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -315,6 +365,11 @@ export const CONTRACT_ABI = [
 				"internalType": "uint256",
 				"name": "registrationTime",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "voterAddress",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
