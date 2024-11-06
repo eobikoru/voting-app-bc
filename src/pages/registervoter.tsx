@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useAccount } from 'wagmi';
 import { useWriteContract } from 'wagmi';
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../constant/constant";
-import { notification } from 'antd';  // Import Ant Design's notification
+
 
 const RegisterVoter = () => {
   const account = useAccount();
-  console.log(account.address, "acct");
   const { writeContract } = useWriteContract();
   
   // Define state for the form inputs
@@ -40,16 +39,10 @@ const RegisterVoter = () => {
       });
        console.log(result)
       // If the contract call is successful
-      notification.success({
-        message: 'Voter Registered Successfully',
-        description: `Voter ${voterName} has been registered successfully.`,
-      });
+     
     } catch (error) {
       // If an error occurs during the contract call
-      notification.error({
-        message: 'Error Registering Voter',
-        description: 'There was an issue registering the voter. Please try again.',
-      });
+    
       console.error(error);
     }
   };
