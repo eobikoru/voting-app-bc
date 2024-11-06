@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { runFireworks } from '../lib/utils';
-
-
+import Notification from '../components/Notification';
+import { useAccount } from 'wagmi'
 
 
 const viewwinner = () => {
@@ -11,6 +11,14 @@ const viewwinner = () => {
     setIsVisible(!isVisible);
     runFireworks();
   } 
+  const account = useAccount()
+  console.log(account.address,"acct");
+  
+  if(account.address === undefined){
+    return (
+      <Notification/>
+    )
+  }
     
   return (
     <div className=''>

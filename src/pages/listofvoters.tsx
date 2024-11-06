@@ -1,6 +1,15 @@
 import React from "react";
-
+import Notification from '../components/Notification';
+import { useAccount } from 'wagmi'
 const listofvoters = () => {
+  const account = useAccount()
+  console.log(account.address,"acct");
+  
+  if(account.address === undefined){
+    return (
+      <Notification/>
+    )
+  }
   return (
     <div className='font-raleway'>
     <div className='bg-black rounded-xl p-10 w-[73vw] m-auto mt-36 '>
