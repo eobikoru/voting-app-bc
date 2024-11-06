@@ -8,6 +8,7 @@ const RegisterVoter = () => {
   const account = useAccount();
   const { writeContract } = useWriteContract();
   
+  
   // Define state for the form inputs
   const [voterAddress, setVoterAddress] = useState<string>('');
   const [voterName, setVoterName] = useState<string>('');
