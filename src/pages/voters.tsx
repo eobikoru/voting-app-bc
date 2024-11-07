@@ -1,7 +1,8 @@
 import React from "react";
 import Notification from "../components/Notification";
 import { useAccount } from "wagmi";
-const listofvoters = () => {
+
+const Voters = () => {
   const account = useAccount();
 
   if (!account.address) {
