@@ -7,9 +7,6 @@ import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../constant/constant";
 const RegisterVoter = () => {
   const account = useAccount();
   const { writeContract } = useWriteContract();
-  
-  
-  // Define state for the form inputs
   const [voterAddress, setVoterAddress] = useState<string>('');
   const [voterName, setVoterName] = useState<string>('');
   const [voterAge, setVoterAge] = useState<string>('');
