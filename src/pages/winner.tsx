@@ -3,7 +3,7 @@ import { runFireworks } from "../lib/utils";
 import Notification from "../components/Notification";
 import { useAccount } from "wagmi";
 
-const viewwinner = () => {
+const Winner = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleList = () => {
@@ -41,4 +41,4 @@ const viewwinner = () => {
   );
 };
 
-export default viewwinner;
+export default Winner;

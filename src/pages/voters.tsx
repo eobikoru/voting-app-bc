@@ -118,4 +118,4 @@ const Voters = () => {
   );
 };
 
-export default listofvoters;
+export default Voters;
