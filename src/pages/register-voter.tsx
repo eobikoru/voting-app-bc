@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useAccount } from 'wagmi';
-import { useWriteContract } from 'wagmi';
+import React, { useState } from "react";
+import { useAccount } from "wagmi";
+import { useWriteContract } from "wagmi";
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../constant/constant";
-
+import { formatAddress } from "../lib/FormatAddress";
 
 const RegisterVoter = () => {
   const account = useAccount();
   const { writeContract } = useWriteContract();
-  const [voterAddress, setVoterAddress] = useState<string>('');
-  const [voterName, setVoterName] = useState<string>('');
-  const [voterAge, setVoterAge] = useState<string>('');
+  const [voterAddress, setVoterAddress] = useState<string>("");
+  const [voterName, setVoterName] = useState<string>("");
+  const [voterAge, setVoterAge] = useState<string>("");
 
   // Handle input changes
   const handleVoterAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,22 +25,21 @@ const RegisterVoter = () => {
   };
 
   // Handle registration logic and display success or error messages
-  const handleRegisterVoter = async () => {
+  const handleRegisterVoter = () => {
     try {
-      console.log('Voter Registered:', { voterAddress, voterName, voterAge });
-      
-      const result = await writeContract({
+      console.log("Voter Registered:", { voterAddress, voterName, voterAge });
+
+      const result = writeContract({
         abi: CONTRACT_ABI,
         address: CONTRACT_ADDRESS,
-        functionName: 'registerVoter',
+        functionName: "registerVoter",
         args: [voterAddress, voterName, parseInt(voterAge)],
       });
-       console.log(result)
+      console.log(result);
       // If the contract call is successful
-     
     } catch (error) {
       // If an error occurs during the contract call
-    
+
       console.error(error);
     }
   };
@@ -59,7 +58,10 @@ const RegisterVoter = () => {
                   <p>Create Candidate For Voting</p>
                 </div>
                 <div className="text-white my-7">
-                  <p>Blockchain voting organization, providing Ethereum blockchain ecosystem.</p>
+                  <p>
+                    Blockchain voting organization, providing Ethereum
+                    blockchain ecosystem.
+                  </p>
                 </div>
                 <div className="bg-[#4f015b] h-10 text-white flex items-center justify-center">
                   <p>Create Candidate For Voting</p>
@@ -120,9 +122,13 @@ const RegisterVoter = () => {
                 />
 
                 <button
-                  className={`bg-[#4f015b] text-white font-semibold py-2 px-3 w-full my-6 rounded ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                  className={`bg-[#4f015b] text-white font-semibold py-2 px-3 w-full my-6 rounded ${
+                    isButtonDisabled
+                      ? "opacity-50 cursor-not-allowed"
+                      : "cursor-pointer"
+                  }`}
                   onClick={handleRegisterVoter}
-                  disabled={isButtonDisabled}  // Disable button if any field is empty
+                  disabled={isButtonDisabled} // Disable button if any field is empty
                 >
                   Register Voter
                 </button>
@@ -135,11 +141,15 @@ const RegisterVoter = () => {
               <div className="text-white h-80 flex pt-6 flex-col w-[90%] mx-auto">
                 <p className="text-white mb-2">Notice</p>
                 <p>
-                  Organizer: {account?.address ? `${account.address.slice(0, 6)}...${account.address.slice(-4)}` : "Address not available"}
+                  Organizer:{" "}
+                  {account?.address
+                    ? `${formatAddress(account?.address)}`
+                    : "Address not available"}
                 </p>
 
                 <p className="mt-6">
-                  Only the organizer of the voting contract can create voter and candidate for voting election
+                  Only the organizer of the voting contract can create voter and
+                  candidate for voting election
                 </p>
               </div>
             </div>
