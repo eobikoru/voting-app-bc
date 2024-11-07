@@ -1,4 +1,54 @@
-import React from "react";
+
+import React, { useState, useEffect } from "react";
+import { useAccount } from 'wagmi';
+import { useWriteContract } from 'wagmi';
+import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../constant/constant";
+
+
+const RegisterVoter = () => {
+  const account = useAccount();
+  const { writeContract } = useWriteContract();
+  const [voterAddress, setVoterAddress] = useState<string>('');
+  const [voterName, setVoterName] = useState<string>('');
+  const [voterAge, setVoterAge] = useState<string>('');
+
+  // Handle input changes
+  const handleVoterAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVoterAddress(e.target.value);
+  };
+
+  const handleVoterNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVoterName(e.target.value);
+  };
+
+  const handleVoterAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVoterAge(e.target.value);
+  };
+
+  // Handle registration logic and display success or error messages
+  const handleRegisterVoter = async () => {
+    try {
+      console.log('Voter Registered:', { voterAddress, voterName, voterAge });
+      
+      const result = await writeContract({
+        abi: CONTRACT_ABI,
+        address: CONTRACT_ADDRESS,
+        functionName: 'registerVoter',
+        args: [voterAddress, voterName, parseInt(voterAge)],
+      });
+       console.log(result)
+      // If the contract call is successful
+     
+    } catch (error) {
+      // If an error occurs during the contract call
+    
+      console.error(error);
+    }
+  };
+
+  // Check if all fields are empty and disable the button accordingly
+  const isButtonDisabled = !voterAddress || !voterName || !voterAge;
+
 
 const registervoter = () => {
   return (
