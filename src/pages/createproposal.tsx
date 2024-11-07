@@ -1,15 +1,6 @@
 import React from "react";
-import Notification from '../components/Notification';
-import { useAccount } from 'wagmi'
-const createproposal = () => {
-  const account = useAccount()
 
-  
-  if(account.address === undefined){
-    return (
-      <Notification/>
-    )
-  }
+const createproposal = () => {
   return (
 
 
@@ -65,7 +56,7 @@ const createproposal = () => {
     <div className=" bg-black h-80 w-[85%] mx-auto mt-10 rounded-xl">
     <div className=" text-white h-80 flex pt-6 flex-col w-[90%] mx-auto ">
      <p className="text-white mb-2">Notice</p>
-     <p>Organizer: {account?.address ? `${account.address.slice(0, 6)}...${account.address.slice(-4)}` : "Address not available"}</p>
+     <p>Organizer: 0xliiut87tf.....</p>
      <p className="mt-6">Only organizer of the voting contract can create a proposal  for voting election</p>
 
      
