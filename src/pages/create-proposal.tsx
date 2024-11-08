@@ -1,14 +1,73 @@
-import React from "react";
+import React, { useState , useEffect} from "react";
 import Notification from "../components/Notification";
 import { useAccount } from "wagmi";
+import { useWriteContract } from "wagmi";
 import { formatAddress } from "../lib/FormatAddress";
+import { message} from "antd";
+import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../constant/constant";
 
 const CreateProposal = () => {
   const account = useAccount();
+  const { writeContract, error:errorOne, isError, isPending ,isSuccess} = useWriteContract();
+  const [proposalTitle, setProposalTitle] = useState(""); // State for proposal title
+  const [proposalText, setProposalText] = useState(""); // State for proposal description
+  useEffect(() => {
+    if(isSuccess){
+      message.success({
+       content: "Proposal has been successfully created.",
+        duration: 3,
+      });
+      setProposalTitle("")
+      setProposalText("")
+    }
+  
+  },[isSuccess])
+
+  useEffect(() => {
+    if (isError) {
+      if (errorOne?.message.includes("Only registered voters can perform this action")) {
+        message.error({
+          content: "Only registered voters can perform this action.",
+          duration: 3
+         });
+      } 
+    }
+  }, [isError, errorOne]);
+
+// Only registered voters can perform this action
+  // Handle title input change
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setProposalTitle(event.target.value);
+  };
+
+  // Handle description input change
+  const handleProposalChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setProposalText(event.target.value);
+    console.log(proposalText);
+  };
 
   if (account.address === undefined) {
     return <Notification />;
   }
+
+  const handleSubmit = () => {
+    console.log(proposalTitle, proposalText);
+    // createProposal
+    try {
+      const result = writeContract({
+        abi: CONTRACT_ABI,
+        address: CONTRACT_ADDRESS,
+        functionName: "createProposal",
+        args: [proposalTitle, proposalText], // Pass both title and description to contract
+      });
+      console.log(result);
+      // If the contract call is successful
+    } catch (error) {
+      // If an error occurs during the contract call
+      console.error(error);
+    }
+  };
+
   return (
     <section>
       <div className="h-[100vh] font-raleway">
@@ -32,22 +91,45 @@ const CreateProposal = () => {
             </div>
           </div>
           <div className=" flex-[2]">
-            <div className=" bg-black  text-white h-[70%] justify-center flex flex-col items-center w-[95%] mx-auto mt-10 rounded-xl">
+            <div className=" bg-black text-white h-[70%] justify-center flex flex-col items-center w-[95%] mx-auto mt-10 rounded-xl">
               <div className=" w-[80%]">
                 <h1 className="text-3xl text-center text-white my-10 font-bold">
                   Create proposal
                 </h1>
-                <div className="flex justify-center items-center ">
+                {/* Proposal Title input */}
+                <div className="flex justify-center items-center my-4">
+                  <input
+                    type="text"
+                    className="bg-white border-0 p-4 rounded w-full shadow-sm"
+                    placeholder="Enter proposal title here..."
+                    value={proposalTitle}
+                    onChange={handleTitleChange}
+                    style={{ color: "black" }}
+                  />
+                </div>
+                {/* Proposal Description textarea */}
+                <div className="flex justify-center items-center">
                   <textarea
                     name="proposal"
                     id="text"
-                    className="bg-white border-0  p-4 rounded h-64 shadow-sm w-full  resize-none"
-                    placeholder="Enter your proposal here..."
+                    className="bg-white border-0 p-4 rounded h-64 shadow-sm w-full resize-none"
+                    placeholder="Enter your proposal description here..."
+                    value={proposalText} // Bind the value to state
+                    onChange={handleProposalChange} // Handle change
+                    style={{ color: "black" }} // Set text color to black
                   ></textarea>
                 </div>
                 <div className="flex justify-center items-center ">
-                  <button className="bg-[#4f015b] text-white font-semibold my-8 rounded p-2 w-1/3 max-w-2xl">
-                    Create Proposal
+                  <button
+                    className={`bg-[#4f015b] text-white font-semibold py-2 px-3 w-full my-6 rounded ${
+                      !proposalTitle || !proposalText || isPending
+                        ? "opacity-50 cursor-not-allowed"
+                        : "cursor-pointer"
+                    }`}
+                    disabled={!proposalTitle || !proposalText || isPending} // Disable the button if title or text is empty
+                    onClick={handleSubmit}
+                  >
+                      {isPending ? "Creating proposal....": "Create Proposal"} 
                   </button>
                 </div>
               </div>

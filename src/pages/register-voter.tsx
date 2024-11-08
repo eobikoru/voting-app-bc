@@ -1,17 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAccount } from "wagmi";
 import { useWriteContract } from "wagmi";
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../constant/constant";
 import { formatAddress } from "../lib/FormatAddress";
-
+import { message} from "antd";
 const RegisterVoter = () => {
   const account = useAccount();
-  const { writeContract } = useWriteContract();
+  const { writeContract, error:errorOne, isError, isPending ,isSuccess} = useWriteContract();
   const [voterAddress, setVoterAddress] = useState<string>("");
   const [voterName, setVoterName] = useState<string>("");
   const [voterAge, setVoterAge] = useState<string>("");
-
-  // Handle input changes
+  useEffect(() => {
+    if(isSuccess){
+      message.success({
+      
+        content: "Voter has been successfully registered.",
+        duration: 3,
+      });
+    setVoterName("")
+    setVoterAddress("")
+    setVoterAge("")
+    }
+  
+  },[isSuccess])
+  useEffect(() => {
+    if (isError) {
+      if (errorOne?.message.includes("Voter is already registered")) {
+        message.error({
+         
+          content: "Voter is already registered.",
+          duration: 3,
+        });
+      } else if (errorOne?.message.includes("Voter must be at least 18 years old")) {
+        message.error({
+         
+          content: "Voter must be at least 18 years old.",
+          duration: 4,
+        });
+      } else if (errorOne?.message.includes("Only registered voters can perform this action")) {
+        message.error({
+         
+          content: "Only registered voters can perform this action.",
+          duration: 4,
+        });
+      } else if (errorOne?.message.includes("Only admin can perform this action")) {
+        message.error({
+         
+          content: "Only admin can perform this action.",
+          duration: 4,
+        });
+      }
+    }
+  }, [isError, errorOne]);
+   // Handle input changes
   const handleVoterAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVoterAddress(e.target.value);
   };
@@ -26,22 +67,19 @@ const RegisterVoter = () => {
 
   // Handle registration logic and display success or error messages
   const handleRegisterVoter = () => {
-    try {
-      console.log("Voter Registered:", { voterAddress, voterName, voterAge });
-
+   
       const result = writeContract({
         abi: CONTRACT_ABI,
         address: CONTRACT_ADDRESS,
         functionName: "registerVoter",
         args: [voterAddress, voterName, parseInt(voterAge)],
       });
-      console.log(result);
-      // If the contract call is successful
-    } catch (error) {
-      // If an error occurs during the contract call
 
-      console.error(error);
-    }
+     
+   
+      // If an error occurs during the contract call
+     
+  
   };
 
   // Check if all fields are empty and disable the button accordingly
@@ -123,14 +161,14 @@ const RegisterVoter = () => {
 
                 <button
                   className={`bg-[#4f015b] text-white font-semibold py-2 px-3 w-full my-6 rounded ${
-                    isButtonDisabled
+                    isButtonDisabled  || isPending
                       ? "opacity-50 cursor-not-allowed"
                       : "cursor-pointer"
                   }`}
                   onClick={handleRegisterVoter}
-                  disabled={isButtonDisabled} // Disable button if any field is empty
+                  disabled={isButtonDisabled || isPending  } // Disable button if any field is empty
                 >
-                  Register Voter
+               {isPending ? "Registering......" : "Register Voter"}  
                 </button>
               </div>
             </div>
