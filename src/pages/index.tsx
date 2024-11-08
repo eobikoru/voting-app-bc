@@ -2,7 +2,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { useAccount, useReadContracts } from "wagmi";
+import { useAccount} from "wagmi";
 import { useReadContract } from "wagmi";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../constant/constant";
 import Notification from "../components/Notification";
@@ -50,9 +50,7 @@ const Home: NextPage = () => {
     functionName: "getRegisteredVoters",
   });
 
-  // console.log(getRegisteredVotersData, "getRegisteredVotersData");
-  // console.log(data);
-  // console.log(error);
+
 
   if (!account.address) {
     return <Notification />;

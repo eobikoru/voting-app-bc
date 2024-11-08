@@ -10,6 +10,7 @@ import { config } from "../wagmi";
 import Navbar from "../components/navbar/Navbar";
 import "../styles/globals.css";
 import Head from "next/head";
+import 'antd/dist/reset.css'; // For antd v5.x
 
 const client = new QueryClient();
 
