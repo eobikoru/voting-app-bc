@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { runFireworks } from "../lib/utils";
 import Notification from "../components/Notification";
 import { useAccount } from "wagmi";
+import { useReadContract } from "wagmi";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../constant/constant";
 
 const Winner = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,12 +13,17 @@ const Winner = () => {
     runFireworks();
   };
   const account = useAccount();
-  console.log(account.address, "acct");
+  const { data, error } = useReadContract({
+    abi: CONTRACT_ABI,
+    address: CONTRACT_ADDRESS,
+    functionName: "getWinner",
+  });
+  
 
   if (!account.address) {
     return <Notification />;
   }
-
+  
   return (
     <div className="">
       <div className="bg-black flex-col flex items-center gap-5 w-[40vw] rounded-xl p-14 m-auto mt-40 font-raleway">
@@ -32,9 +39,9 @@ const Winner = () => {
             isVisible ? "flex" : "hidden"
           } `}
         >
-          <p>Description: </p>
-          <p>Vote Count: </p>
-          <p>Creator: </p>
+            <p><strong>Title:</strong> </p>
+            <p><strong>Vote Count:</strong> </p>
+            <p><strong>Creator:</strong> </p> 
         </div>
       </div>
     </div>

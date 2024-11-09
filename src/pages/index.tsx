@@ -105,11 +105,15 @@ const Home: NextPage = () => {
             <h1 className="text-center font-bold text-3xl py-5 mb-4 text-white">
               List Of Voters
             </h1>
+            {!voters?.length && (
+               <h2 className="text-white text-center text-[1.2rem]">No data yet</h2>
+            ) }
+           
             <div className="flex flex-col">
-              {!getRegisteredVotersData ? (
+              {!voters?.length ? (
                 <>
-                  <div className="flex justify-center h-70">
-                    <img src="/image/illus.webp" alt="sdk" />
+                  <div className="flex justify-center  h-60">
+                    <img className="w-60" src="/image/illus.webp" alt="sdk" />
                   </div>
                 </>
               ) : (

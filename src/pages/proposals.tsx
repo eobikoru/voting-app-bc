@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect  } from 'react';
 import { useAccount } from "wagmi";
 import { useReadContract,useWriteContract } from "wagmi";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../constant/constant";
 import Notification from "../components/Notification";
-
+import { message} from "antd";
 type Proposal = {
   id: string;
   timestamp: BigInt;
@@ -15,11 +15,41 @@ type Proposal = {
 
 const Proposals = () => {
   const account = useAccount();
-  const { writeContract } = useWriteContract();
+  const { writeContract , error:errorOne, isError, isPending ,isSuccess } = useWriteContract();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProposal, setSelectedProposal] = useState<Proposal | null>(null);
+  useEffect(() => {
+    if(isSuccess){
+      message.success({
+        content: "Voter has voted successfully .",
+        duration: 3,
+      });
+      setIsModalOpen(false);
+    }
+  },[isSuccess]);
+  useEffect(() => {
+    if (isError) {
+      if (errorOne?.message.includes("You have already voted")) {
+        message.error({
+          content: "You have already voted.",
+          duration: 3,
+        });
+      }
+     else if (errorOne?.message.includes("Voting is not active")) {
+        message.error({
+          content: "Voting is not active.",
+          duration: 3,
+        });
+      }
+      else if (errorOne?.message.includes("Only registered voters can perform this action")) {
+        message.error({
+          content: "Only registered voters can perform this action.",
+          duration: 4,
+        });
+      }
+    }
+  }, [isError, errorOne]);
 
-  console.log(selectedProposal,"lol");
   if (!account.address) {
     return <Notification />;
   }
@@ -32,9 +62,7 @@ const Proposals = () => {
 
   const proposals = Array.isArray(data) ? (data as Proposal[]) : [];
 
-  if (error) {
-    return <div>Error loading proposals</div>;
-  }
+
 
   const handleViewClick = (proposal: Proposal) => {
     setSelectedProposal(proposal);
@@ -57,8 +85,6 @@ const Proposals = () => {
         functionName: "vote",
         args: [proposalId], 
       });
-      console.log(result);
-      setIsModalOpen(false);
       // If the contract call is successful
     } catch (error) {
       // If an error occurs during the contract call
@@ -172,10 +198,15 @@ const Proposals = () => {
                 Close
               </button>
               <button
+                disabled={isPending}
                 onClick={handleVote}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                className={`bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 ${
+                  isPending
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
+                }`}
               >
-                Vote
+                {isPending ? "Voting......" : "Vote"}  
               </button>
             </div>
           </div>
