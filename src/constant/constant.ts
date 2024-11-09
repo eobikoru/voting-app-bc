@@ -1,5 +1,5 @@
 
-export const CONTRACT_ADDRESS = "0x4a4aBA3371ddAe94C26F8952717ebE864b6e169e";
+export const CONTRACT_ADDRESS = "0x364D2D8004d71330e71d2577b4A620b9e5e96E07";
 export const CONTRACT_ABI = [
 	{
 		"inputs": [
@@ -184,14 +184,46 @@ export const CONTRACT_ABI = [
 		"name": "getWinner",
 		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "winningProposalId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "winningVoteCount",
-				"type": "uint256"
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "voteCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "exists",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct Vote.Proposal",
+				"name": "winnerProposal",
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
