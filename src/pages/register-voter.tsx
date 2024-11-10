@@ -87,7 +87,7 @@ const RegisterVoter = () => {
 
   return (
     <section>
-      <div className="h-[100vh] font-raleway">
+      <div className="h-[100vh] my-20 font-raleway">
         <div className="h-[100%] flex">
           <div className="flex-1">
             <div className="bg-black h-80 w-[85%] mx-auto mt-10 rounded-xl">

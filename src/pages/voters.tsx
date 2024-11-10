@@ -25,7 +25,7 @@ const Voters = () => {
     : [];
 
   return (
-    <div className="font-raleway">
+    <div className="font-raleway my-32">
         <div className="bg-black rounded-xl p-10 w-[70%] m-auto mt-14">
             <h1 className="text-center font-bold text-3xl py-5 mb-4 text-white">
               List Of Voters
