@@ -92,7 +92,7 @@ const Proposals = () => {
     }
   }
   return (
-    <div className="font-raleway">
+    <div className="font-raleway my-30">
       <div className="bg-black rounded-xl p-10 w-[70%] m-auto mt-36">
         <h1 className="text-center font-bold text-3xl py-5 text-white">
           List Of Proposals
