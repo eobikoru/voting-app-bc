@@ -1,5 +1,5 @@
 
-export const CONTRACT_ADDRESS = "0x364D2D8004d71330e71d2577b4A620b9e5e96E07";
+export const CONTRACT_ADDRESS = "0x858Fb59a2a99BC610104265093Eabe9F4C601255";
 export const CONTRACT_ABI = [
 	{
 		"inputs": [
@@ -15,13 +15,6 @@ export const CONTRACT_ABI = [
 			}
 		],
 		"name": "createProposal",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "endVoting",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -50,8 +43,14 @@ export const CONTRACT_ABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "startVoting",
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "_state",
+				"type": "bool"
+			}
+		],
+		"name": "toggleVoting",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -224,6 +223,19 @@ export const CONTRACT_ABI = [
 				"internalType": "struct Vote.Proposal",
 				"name": "winnerProposal",
 				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "isVotingActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
