@@ -12,8 +12,7 @@ const RegisterVoter = () => {
   const [voterAge, setVoterAge] = useState<string>("");
   useEffect(() => {
     if(isSuccess){
-      message.success({
-      
+      message.success({ 
         content: "Voter has been successfully registered.",
         duration: 3,
       });
