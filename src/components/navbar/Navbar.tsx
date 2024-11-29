@@ -87,7 +87,7 @@ const Navbar = () => {
         {account.address && (
           <Dropdown overlay={menu} trigger={["click"]} placement="bottomCenter">
             <Button className="flex items-center gap-x-2 text-sm font-bold text-black bg-white rounded-xl px-6 py-5 shadow-md hover:bg-gray-200 transition-all duration-300">
-              Features <DownOutlined />
+              Menu <DownOutlined />
             </Button>
           </Dropdown>
         )}
